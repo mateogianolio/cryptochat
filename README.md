@@ -45,11 +45,11 @@ Messages are piped from ```stdin``` and encrypted before they are split into pay
 
 <table>
   <tr>
-    <td>**bits 0-15**</td>
-    <td>**bits 16-31**</td>
+    <td></b>bits 0-15</b></td>
+    <td><b>bits 16-31</b></td>
   </tr>
   <tr>
-    <td>identifier = ```0x6363```</td>
+    <td>identifier = <code>0x6363</code></td>
     <td>message length</td>
   </tr>
   <tr>
@@ -61,15 +61,15 @@ An "end" request is sent in order for the receiver to know when a message is com
 
 <table>
   <tr>
-    <td>**bits 0-15**</td>
-    <td>**bits 16-31**</td>
+    <td><b>bits 0-15</b></td>
+    <td><b>bits 16-31</b></td>
   </tr>
   <tr>
-    <td>```0x6363```</td>
-    <td>```0x0010```</td>
+    <td><code>0x6363</code></td>
+    <td><code>0x0010</code></td>
   </tr>
   <tr>
-    <td colspan="3">```0xffffffffffffffff```</td>
+    <td colspan="3"><code>0xffffffffffffffff</code></td>
   </tr>
 </table>
 
