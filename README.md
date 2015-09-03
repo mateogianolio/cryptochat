@@ -20,9 +20,9 @@ sudo npm install -g cryptochat
 
 <table>
   <tr>
-    <td>bits 0-7</td>
-    <td>bits 8-15</td>
-    <td>bits 16-31</td>
+    <td><b>bits 0-7</b></td>
+    <td><b>bits 8-15</b></td>
+    <td><b>bits 16-31</b></td>
   </tr>
   <tr>
     <td>type = 0</td>
@@ -45,7 +45,7 @@ Messages are piped from ```stdin``` and encrypted before they are split into pay
 
 <table>
   <tr>
-    <td></b>bits 0-15</b></td>
+    <td><b>bits 0-15</b></td>
     <td><b>bits 16-31</b></td>
   </tr>
   <tr>
