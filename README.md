@@ -16,7 +16,7 @@ Make sure you have node ```0.10.x``` (*tip:* use [n](https://www.npmjs.com/packa
 sudo npm install -g cryptochat
 ```
 
-### ICMP Echo request format
+### [ICMP Echo request](https://en.wikipedia.org/wiki/Ping_(networking_utility)) format
 
 <table>
   <tr>
