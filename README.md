@@ -43,7 +43,7 @@ The message data is attached as the ICMP payload.
 ### Message
 Messages are piped from ```stdin``` and encrypted before they are split into payload packages and sent as ICMP Echo requests.
 
-<table width="100%">
+<table>
   <tr>
     <td>**bits 0-15**</td>
     <td>**bits 16-31**</td>
@@ -59,7 +59,7 @@ Messages are piped from ```stdin``` and encrypted before they are split into pay
 
 An "end" request is sent in order for the receiver to know when a message is completed. The end request has the following format:
 
-<table width="100%">
+<table>
   <tr>
     <td>**bits 0-15**</td>
     <td>**bits 16-31**</td>
