@@ -41,7 +41,7 @@ sudo npm install -g cryptochat
 The message data is attached as the ICMP payload.
 
 ### Message
-Messages are piped from ```stdin``` and encrypted before they are split into payload packages and sent as ICMP Echo requests.
+Messages are piped from ```stdin``` and split into payload packages, which are encrypted separately and sent as ICMP Echo requests.
 
 <table>
   <tr>
