@@ -19,6 +19,8 @@
     return;
   }
 
+  require('terminal-colors');
+
   var raw = require('raw-socket'),
       exec = require('exec-sync'),
       crypto = require('./encryption.js'),
@@ -74,28 +76,30 @@
 
     // end ping
     if(hex === 'ffffffffffffffff') {
-      process.stdout.write(source + ' ');
+      process.stdout.write(source.green + ' ');
       process.stdout.write('[' + count + ']: ');
-      process.stdout.write(crypto.decrypt(message, key).split(/\r|\r\n/).shift());
+      process.stdout.write(message.bold + '\n');
 
       count = 0;
       message = '';
-      
+
       return;
     }
 
-    message += hex;
+    message += crypto.decrypt(hex, key);
     count++;
   }
 
-  function send(text) {
-    var msg = crypto.encrypt(text, key),
-        payloads = msg.match(/.{1,16}/g),
+  function send(msg) {
+    var payloads = msg.match(/.{1,8}/g),
         payload;
 
     for(var i = 0; i < payloads.length; i++) {
       payload = payloads[i];
-      payload = id.toString(16) + ('0000' + payload.length.toString(16)).substr(-4) + payload;
+      payload = id.toString(16) +
+                ('0000' + (payload.length * 2).toString(16)).substr(-4) +
+                crypto.encrypt(payload, key);
+
       while(payload.length < 16)
         payload += '0';
 

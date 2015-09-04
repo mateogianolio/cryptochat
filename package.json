@@ -1,13 +1,14 @@
 {
   "name": "cryptochat",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "encrypted P2P chat over ICMP",
   "bin": {
     "cryptochat": "./cryptochat.js"
   },
   "dependencies": {
     "exec-sync": "^0.1.6",
-    "raw-socket": "^1.3.2"
+    "raw-socket": "^1.3.2",
+    "terminal-colors": "^0.1.3"
   },
   "devDependencies": {},
   "scripts": {
