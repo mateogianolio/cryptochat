@@ -42,8 +42,8 @@ If it doesn't work, it is probably because either your computer or your router i
     <td><b>bits 16-31</b></td>
   </tr>
   <tr>
-    <td>type = ```0x0000```</td>
-    <td>code = ```0x0000```</td>
+    <td>type = <code>0x0000</code></td>
+    <td>code = <code>0x0000</code></td>
     <td>header checksum</td>
   </tr>
   <tr>
