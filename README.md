@@ -3,7 +3,14 @@
 Encrypted (see ```encryption.js```, currently uses the [crypto](https://nodejs.org/api/crypto.html) module's **AES-256-CTR**) P2P chat over ICMP using ```ping``` requests.
 
 ```bash
+# send and receive messages
 $ sudo cryptochat <ip> <encryption_key>
+
+# receive messages
+$ sudo cryptochat server <encryption_key>
+
+# send messages
+$ sudo cryptochat client <ip> <encryption_key>
 ```
 
 If it doesn't work, it is probably because either your computer or your router is somehow blocking external ICMP requests.

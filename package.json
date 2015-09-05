@@ -1,6 +1,6 @@
 {
   "name": "cryptochat",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "encrypted P2P chat over ICMP",
   "bin": {
     "cryptochat": "./cryptochat.js"
