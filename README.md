@@ -42,8 +42,8 @@ If it doesn't work, it is probably because either your computer or your router i
     <td><b>bits 16-31</b></td>
   </tr>
   <tr>
-    <td>type = 0</td>
-    <td>code = 0</td>
+    <td>type = ```0x0000```</td>
+    <td>code = ```0x0000```</td>
     <td>header checksum</td>
   </tr>
   <tr>
@@ -82,15 +82,15 @@ An "end" request is sent in order for the receiver to know when a message is com
     <td><b>bits 16-31</b></td>
   </tr>
   <tr>
-    <td><code>0x6363</code></td>
-    <td><code>0x0010</code></td>
+    <td>identifier = <code>0x6363</code></td>
+    <td>message length = <code>0x0010</code></td>
   </tr>
   <tr>
     <td colspan="3"><code>0xffffffffffffffff</code></td>
   </tr>
 </table>
 
-When the end request is received, the full message is decrypted and printed to the screen.
+When the end request is received, the full message is printed to the screen.
 
 ### Contribute
 
