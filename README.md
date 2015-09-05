@@ -31,7 +31,11 @@ Three variants of cryptochat are available depending on your use case:
   $ sudo cryptochat client <ip> <encryption_key>
   ```
 
-If it doesn't work, it is probably because either your computer or your router is somehow blocking external ICMP requests.
+Because it relies on ```stdin``` for input, it is possible to use pipes to send data:
+
+```cat cryptochat.js | sudo cryptochat <ip> <encryption_key>```
+
+That is quite awesome.
 
 ### [ICMP Echo request](https://en.wikipedia.org/wiki/Ping_(networking_utility)) format
 
