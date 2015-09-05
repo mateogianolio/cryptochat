@@ -1,27 +1,37 @@
 # cryptochat
 
+[![npm](https://img.shields.io/npm/dm/cryptochat.svg?style=flat-square)]()
+
 Encrypted (see ```encryption.js```, currently uses the [crypto](https://nodejs.org/api/crypto.html) module's **AES-256-CTR**) P2P chat over ICMP using ```ping``` requests.
 
-```bash
-# send and receive messages
-$ sudo cryptochat <ip> <encryption_key>
+Uses the awesome [raw-socket](http://npmjs.org/package/raw-socket) for ICMP monitoring.
 
-# receive messages
-$ sudo cryptochat server <encryption_key>
-
-# send messages
-$ sudo cryptochat client <ip> <encryption_key>
-```
-
-If it doesn't work, it is probably because either your computer or your router is somehow blocking external ICMP requests.
-
-### Install
+### Install and usage
 
 Make sure you have node ```0.10.x``` (*tip:* use [n](https://www.npmjs.com/package/n)) and then install the package globally with ```sudo```.
 
 ```bash
 sudo npm install -g cryptochat
 ```
+
+Three variants of cryptochat are available depending on your use case:
+
+* **Send and receive messages**
+  ```bash
+  $ sudo cryptochat <ip> <encryption_key>
+  ```
+
+* **Receive messages**
+  ```bash
+  $ sudo cryptochat server <encryption_key>
+  ```
+
+* **Send messages**
+  ```bash
+  $ sudo cryptochat client <ip> <encryption_key>
+  ```
+
+If it doesn't work, it is probably because either your computer or your router is somehow blocking external ICMP requests.
 
 ### [ICMP Echo request](https://en.wikipedia.org/wiki/Ping_(networking_utility)) format
 
