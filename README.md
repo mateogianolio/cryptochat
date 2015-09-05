@@ -16,17 +16,17 @@ sudo npm install -g cryptochat
 
 Three variants of cryptochat are available depending on your use case:
 
-* **Send and receive messages**
+* **Send** and **receive** messages
   ```bash
   $ sudo cryptochat <ip> <encryption_key>
   ```
 
-* **Receive messages**
+* **Receive** messages
   ```bash
   $ sudo cryptochat server <encryption_key>
   ```
 
-* **Send messages**
+* **Send** messages
   ```bash
   $ sudo cryptochat client <ip> <encryption_key>
   ```
