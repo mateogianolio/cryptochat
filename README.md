@@ -33,7 +33,9 @@ Three variants of cryptochat are available depending on your use case:
 
 Because it relies on ```stdin``` for input, it is possible to use pipes to send data:
 
-```cat cryptochat.js | sudo cryptochat <ip> <encryption_key>```
+```bash
+cat cryptochat.js | sudo cryptochat <ip> <encryption_key>
+```
 
 That is quite awesome.
 
