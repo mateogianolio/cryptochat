@@ -25,9 +25,9 @@
 
     function send(msg) {
       var payloads = msg.match(/.{1,31}/g),
+          packets = [],
           payload,
-          length,
-          packets;
+          length;
 
       for(var i = 0; i < payloads.length; i++) {
         payload = payloads[i];
