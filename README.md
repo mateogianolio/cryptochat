@@ -75,7 +75,7 @@ An "end" request is sent in order for the receiver to know when a message is com
     <td><code>0x3e</code></td>
     <td><code>0xffffffff...</code></td>
   </tr>
-</table
+</table>
 
 When the end request is received, the full message is printed to the screen.
 
