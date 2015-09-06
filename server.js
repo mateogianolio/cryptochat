@@ -1,4 +1,6 @@
 (function() {
+  'use strict';
+
   module.exports = function(key) {
     require('terminal-colors');
 
@@ -10,7 +12,6 @@
         });
 
     var message = '',
-        id = 0x6363, // 'cc'
         count = 0,
         offset,
         type,
@@ -19,23 +20,20 @@
 
     socket.on('message', listen);
     function listen(buffer, source) {
-      // convert buffer to hex string
-      buffer = buffer.toString('hex');
+      // convert buffer to hex string, ignore IP header (20 bytes)
+      buffer = buffer.toString('hex', 20, buffer.length);
 
-      // find identifier in buffer or return
-      offset = buffer.indexOf(id.toString(16));
-      if(offset === -1)
-        return;
+      /**
+       * types
+       * 0x00 = ICMP Echo reply,
+       * 0x08 = ICMP Echo request
+       **/
+      type = parseInt(buffer.substring(0, 2), 16);
 
-      // get length of message (first 2 bytes after identifier)
-      offset += 4;
-      length = parseInt(buffer.substring(offset, offset + 4), 16);
-
-      // get type of message
-      type = parseInt(buffer.substring(40, 42), 16);
+      length = parseInt(buffer.substring(16, 18), 16);
 
       // get message
-      offset += 4;
+      offset = 18;
       hex = buffer.substring(offset, offset + length);
 
       if(DEBUG) {
@@ -46,12 +44,12 @@
         console.log('message content:', hex);
       }
 
-      // return if type is ICMP Echo reply
+      // ignore ICMP Echo replies
       if(type === 0)
         return;
 
-      // end ping
-      if(hex === 'ffffffffffffffff') {
+      // encountered end ping
+      if((hex.match(/f/g) || []).length === length) {
         process.stdout.write(source.green + ' ');
         process.stdout.write('[' + count + ']: ');
         process.stdout.write(message.bold + '\n');

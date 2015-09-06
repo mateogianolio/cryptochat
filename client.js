@@ -1,4 +1,6 @@
 (function() {
+  'use strict';
+
   module.exports = function(address, key) {
     if(!address) {
       console.log('Error: no IP address provided.');
@@ -12,28 +14,64 @@
       return;
     }
 
-    var exec = require('exec-sync'),
-        crypto = require('./encryption.js');
-
-    var id = 0x6363; // 'cc'
+    var raw = require('raw-socket'),
+        crypto = require('./encryption.js'),
+        socket = raw.createSocket({
+          protocol: raw.Protocol.ICMP
+        });
 
     process.stdin.setEncoding('utf8');
     process.stdin.on('data', send);
 
     function send(msg) {
-      var payloads = msg.match(/.{1,8}/g),
-          payload;
+      var payloads = msg.match(/.{1,31}/g),
+          packets = [],
+          payload,
+          length;
 
       for(var i = 0; i < payloads.length; i++) {
         payload = payloads[i];
-        payload = id.toString(16) +
-                  ('0000' + (payload.length * 2).toString(16)).substr(-4) +
-                  crypto.encrypt(payload, key);
+        length = ('00' + (payload.length * 2).toString(16)).substr(-2);
+        payload = length + crypto.encrypt(payload, key);
 
-        exec('ping -s 48 -c 1 -p ' + payload + ' ' + address);
+        packets.push(packet(payload));
       }
 
-      exec('ping -s 48 -c 1 -p 63630010ffffffffffffffff ' + address); // end ping
+      packets.push(packet('3e'));
+
+      function ping() {
+        if(!packets.length)
+          return;
+
+        var packet = packets.shift();
+        socket.send(packet, 0, packet.length, address, function(error) {
+          if(error)
+            throw error;
+
+          ping();
+        });
+      }
+
+      ping();
+    }
+
+    function packet(message) {
+      while(message.length < 64)
+        message += 'f';
+
+      var buffer = new Buffer(40);
+      buffer[0] = 0x08; // type
+      buffer[1] = 0x00; // code
+      buffer[2] = 0x00; // checksum placeholder
+      buffer[3] = 0x00; // checksum placeholder
+      buffer[4] = 0x00; // identifier
+      buffer[5] = 0x01; // identifier
+      buffer[6] = 0x0a; // seqnum
+      buffer[7] = 0x09; // seqnum
+      buffer.write(message, 8, 'hex');
+      raw.writeChecksum(buffer, 2, raw.createChecksum(buffer));
+
+      return buffer;
     }
   };
 }());
