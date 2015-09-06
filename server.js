@@ -1,4 +1,6 @@
 (function() {
+  'use strict';
+
   module.exports = function(key) {
     require('terminal-colors');
 
@@ -10,7 +12,6 @@
         });
 
     var message = '',
-        id = 0x6363, // 'cc'
         count = 0,
         offset,
         type,
@@ -20,22 +21,12 @@
     socket.on('message', listen);
     function listen(buffer, source) {
       // convert buffer to hex string
-      buffer = buffer.toString('hex');
-
-      // find identifier in buffer or return
-      offset = buffer.indexOf(id.toString(16));
-      if(offset === -1)
-        return;
-
-      // get length of message (first 2 bytes after identifier)
-      offset += 4;
-      length = parseInt(buffer.substring(offset, offset + 4), 16);
-
-      // get type of message
-      type = parseInt(buffer.substring(40, 42), 16);
+      buffer = buffer.toString('hex', 20, buffer.length);
+      type = parseInt(buffer.substring(0, 2), 16);
+      length = parseInt(buffer.substring(8, 10), 16);
 
       // get message
-      offset += 4;
+      offset = 10;
       hex = buffer.substring(offset, offset + length);
 
       if(DEBUG) {
@@ -51,7 +42,7 @@
         return;
 
       // end ping
-      if(hex === 'ffffffffffffffff') {
+      if((hex.match(/f/g) || []).length === hex.length) {
         process.stdout.write(source.green + ' ');
         process.stdout.write('[' + count + ']: ');
         process.stdout.write(message.bold + '\n');
