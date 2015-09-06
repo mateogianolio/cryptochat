@@ -4,7 +4,7 @@
   module.exports = function(key) {
     require('terminal-colors');
 
-    var DEBUG = true;
+    var DEBUG = false;
     var raw = require('raw-socket'),
         crypto = require('./encryption.js'),
         socket = raw.createSocket({
@@ -20,9 +20,16 @@
 
     socket.on('message', listen);
     function listen(buffer, source) {
-      // convert buffer to hex string
+      // convert buffer to hex string, ignore IP header (20 bytes)
       buffer = buffer.toString('hex', 20, buffer.length);
+
+      /**
+       * types
+       * 0x00 = ICMP Echo reply,
+       * 0x08 = ICMP Echo request
+       **/
       type = parseInt(buffer.substring(0, 2), 16);
+
       length = parseInt(buffer.substring(16, 18), 16);
 
       // get message
@@ -37,12 +44,12 @@
         console.log('message content:', hex);
       }
 
-      // return if type is ICMP Echo reply
+      // ignore ICMP Echo replies
       if(type === 0)
         return;
 
-      // end ping
-      if(hex === 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff') {
+      // encountered end ping
+      if((hex.match(/f/g) || []).length === length) {
         process.stdout.write(source.green + ' ');
         process.stdout.write('[' + count + ']: ');
         process.stdout.write(message.bold + '\n');
