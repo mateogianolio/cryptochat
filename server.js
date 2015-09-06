@@ -20,7 +20,7 @@
     socket.on('message', listen);
     function listen(buffer, source) {
       // convert buffer to hex string
-      buffer = buffer.toString('hex', 0, buffer.length);
+      buffer = buffer.toString('hex');
 
       // find identifier in buffer or return
       offset = buffer.indexOf(id.toString(16));

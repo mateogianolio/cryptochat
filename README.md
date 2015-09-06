@@ -48,8 +48,8 @@ That is quite awesome.
     <td><b>bits 16-31</b></td>
   </tr>
   <tr>
-    <td>type = <code>0x0000</code></td>
-    <td>code = <code>0x0000</code></td>
+    <td>type = <code>0x08</code></td>
+    <td>code = <code>0x00</code></td>
     <td>header checksum</td>
   </tr>
   <tr>
