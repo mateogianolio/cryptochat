@@ -36,6 +36,8 @@
 
         buffer = packet(payload);
         socket.send(buffer, 0, buffer.length, address, sent);
+
+        sleep(100);
       }
 
       buffer = packet('1f');
@@ -59,6 +61,13 @@
       raw.writeChecksum(buffer, 2, raw.createChecksum(buffer));
 
       return buffer;
+    }
+
+    function sleep(milliseconds) {
+      var start = new Date().getTime();
+      for(var i = 0; i < 1e7; i++)
+        if((new Date().getTime() - start) > milliseconds)
+          break;
     }
 
     function sent(error) {
