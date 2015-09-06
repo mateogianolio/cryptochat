@@ -23,10 +23,10 @@
       // convert buffer to hex string
       buffer = buffer.toString('hex', 20, buffer.length);
       type = parseInt(buffer.substring(0, 2), 16);
-      length = parseInt(buffer.substring(8, 10), 16);
+      length = parseInt(buffer.substring(8, 9), 16);
 
       // get message
-      offset = 10;
+      offset = 9;
       hex = buffer.substring(offset, offset + length);
 
       if(DEBUG) {
