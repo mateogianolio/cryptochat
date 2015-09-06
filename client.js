@@ -27,21 +27,33 @@
       var payloads = msg.match(/.{1,31}/g),
           payload,
           length,
-          buffer;
+          packets;
 
       for(var i = 0; i < payloads.length; i++) {
         payload = payloads[i];
         length = ('00' + (payload.length * 2).toString(16)).substr(-2);
         payload = length + crypto.encrypt(payload, key);
 
-        buffer = packet(payload);
-        socket.send(buffer, 0, buffer.length, address, sent);
-
-        sleep(100);
+        packets.push(packet(payload));
       }
 
-      buffer = packet('1f');
-      socket.send(buffer, 0, buffer.length, address, sent);
+      packets.push(packet('3e'));
+
+      function ping() {
+        if(!packets.length)
+          return;
+
+        var packet = packets.shift();
+
+        socket.send(packet, 0, packet.length, address, function(error, bytes) {
+          if(error)
+            throw error;
+
+          ping();
+        });
+      }
+
+      ping();
     }
 
     function packet(message) {
@@ -61,13 +73,6 @@
       raw.writeChecksum(buffer, 2, raw.createChecksum(buffer));
 
       return buffer;
-    }
-
-    function sleep(milliseconds) {
-      var start = new Date().getTime();
-      for(var i = 0; i < 1e7; i++)
-        if((new Date().getTime() - start) > milliseconds)
-          break;
     }
 
     function sent(error) {
