@@ -44,8 +44,7 @@
           return;
 
         var packet = packets.shift();
-
-        socket.send(packet, 0, packet.length, address, function(error, bytes) {
+        socket.send(packet, 0, packet.length, address, function(error) {
           if(error)
             throw error;
 
@@ -73,11 +72,6 @@
       raw.writeChecksum(buffer, 2, raw.createChecksum(buffer));
 
       return buffer;
-    }
-
-    function sent(error) {
-      if(error)
-        throw error;
     }
   };
 }());
