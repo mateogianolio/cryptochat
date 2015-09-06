@@ -4,7 +4,7 @@
   module.exports = function(key) {
     require('terminal-colors');
 
-    var DEBUG = false;
+    var DEBUG = true;
     var raw = require('raw-socket'),
         crypto = require('./encryption.js'),
         socket = raw.createSocket({
@@ -42,7 +42,7 @@
         return;
 
       // end ping
-      if((hex.match(/f/g) || []).length === hex.length) {
+      if(hex === 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff') {
         process.stdout.write(source.green + ' ');
         process.stdout.write('[' + count + ']: ');
         process.stdout.write(message.bold + '\n');
