@@ -52,8 +52,8 @@
 
       // first ping
       if(!count && length === 62) {
-        salt = crypto.hex2bytes(hex.substring(0, 29));
-        iv = crypto.hex2bytes(hex.substring(30, 61));
+        salt = crypto.hex2bytes(hex.substring(0, 30));
+        iv = crypto.hex2bytes(hex.substring(30, 62));
         count++;
         return;
       }
