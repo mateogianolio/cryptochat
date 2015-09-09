@@ -50,6 +50,20 @@
       if(type === 0)
         return;
 
+      // encountered end ping
+      if((hex.match(/f/g) || []).length === length) {
+        if(message) {
+          process.stdout.write(source.green + ' ');
+          process.stdout.write('[' + count + ']: ');
+          process.stdout.write(message.bold + '\n');
+        }
+
+        count = 0;
+        message = '';
+
+        return;
+      }
+
       // first ping
       if(count === 0) {
         salt = crypto.hex2bytes(hex.substring(0, 30));
@@ -58,22 +72,7 @@
         return;
       }
 
-      // encountered end ping
-      if((hex.match(/f/g) || []).length === length) {
-        process.stdout.write(source.green + ' ');
-        process.stdout.write('[' + count + ']: ');
-        process.stdout.write(message.bold + '\n');
-
-        count = 0;
-        message = '';
-
-        return;
-      }
-
-      console.log(salt);
-
       derivedKey = crypto.key(key, salt);
-      console.log(derivedKey);
       message += crypto.decrypt(hex, derivedKey, iv);
       count++;
     }

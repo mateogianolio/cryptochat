@@ -26,7 +26,7 @@
       return crypto.randomBytes(16);
     },
     key: function(secret, salt) {
-      return crypto.pbkdf2Sync(secret, salt, 4096, 32);
+      return crypto.pbkdf2Sync(secret, salt, 512, 32);
     },
     hex2bytes: function(hex) {
       if(hex.length % 2 !== 0)
