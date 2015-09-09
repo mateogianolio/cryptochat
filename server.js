@@ -51,7 +51,7 @@
         return;
 
       // first ping
-      if(!salt && !iv && length === 62) {
+      if(count === 0) {
         salt = crypto.hex2bytes(hex.substring(0, 30));
         iv = crypto.hex2bytes(hex.substring(30, 62));
         count++;
@@ -71,6 +71,7 @@
       }
 
       derivedKey = crypto.key(key, salt);
+      console.log(derivedKey);
       message += crypto.decrypt(hex, derivedKey, iv);
       count++;
     }

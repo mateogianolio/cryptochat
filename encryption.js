@@ -29,14 +29,13 @@
       return crypto.pbkdf2Sync(secret, salt, 4096, 32);
     },
     hex2bytes: function(hex) {
-      console.log(hex.length, hex);
       if(hex.length % 2 !== 0)
         throw new Error(hex + ' is not a valid hex string');
 
       var bytes = new Buffer(hex.length / 2);
       for(var i = 0; i < hex.length; i += 2)
         bytes[i / 2] = parseInt(hex.substring(i, i + 1), 16);
-
+        
       return bytes;
     }
   };
