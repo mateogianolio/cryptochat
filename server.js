@@ -70,6 +70,8 @@
         return;
       }
 
+      console.log(salt);
+
       derivedKey = crypto.key(key, salt);
       console.log(derivedKey);
       message += crypto.decrypt(hex, derivedKey, iv);
