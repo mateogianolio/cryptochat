@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/dm/cryptochat.svg?style=flat-square)]()
 
-[Encrypted](https://github.com/mateogianolio/cryptochat/blob/master/encryption) P2P chat over ICMP ([**I**nternet **C**ontrol **M**essage **P**rotocol](https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol)).
+[Encrypted](https://github.com/mateogianolio/cryptochat/blob/master/encryption.js) P2P chat over ICMP ([**I**nternet **C**ontrol **M**essage **P**rotocol](https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol)).
 
 I strongly advise you to pick a high-entropy encryption key to avoid the possibility of brute-force attacks.
 
