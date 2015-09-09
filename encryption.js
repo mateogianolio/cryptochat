@@ -33,8 +33,10 @@
         throw new Error(hex + ' is not a valid hex string');
 
       var bytes = new Buffer(hex.length / 2);
-      for(var i = 0; i < hex.length; i += 2)
+      for(var i = 0; i < hex.length; i += 2) {
+        console.log(hex.substr(i, i + 1));
         bytes[i / 2] = parseInt(hex.substr(i, i + 1), 16);
+      }
 
       return bytes;
     }
