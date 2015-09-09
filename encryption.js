@@ -9,7 +9,6 @@
     encrypt: function(str, key, iv) {
       var cipher = crypto.createCipheriv(ENCRYPTION, key, iv),
           encrypted = cipher.update(str, 'utf8', 'hex');
-
       encrypted += cipher.final('hex');
       return encrypted;
     },
@@ -21,7 +20,7 @@
       return decrypted;
     },
     salt: function() {
-      return crypto.randomBytes(16);
+      return crypto.randomBytes(15);
     },
     iv: function() {
       return crypto.randomBytes(16);

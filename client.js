@@ -33,7 +33,7 @@
           iv = crypto.iv(),
           derivedKey = crypto.key(key, salt);
 
-      packets.push('3e' + salt.toString('hex') + iv.toString('hex'));
+      packets.push(packet('3e' + salt.toString('hex') + iv.toString('hex')));
 
       for(var i = 0; i < payloads.length; i++) {
         payload = payloads[i];
@@ -64,6 +64,8 @@
     function packet(message) {
       while(message.length < 64)
         message += 'f';
+
+      console.log(message);
 
       var buffer = new Buffer(40);
       buffer[0] = 0x08; // type
