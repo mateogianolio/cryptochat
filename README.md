@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/dm/cryptochat.svg?style=flat-square)]()
 
-Encrypted (see ```encryption.js```, currently uses the [crypto](https://nodejs.org/api/crypto.html) module's **AES-256-CTR**) P2P chat over ICMP using ```ping``` requests.
+Encrypted (see ```encryption.js```, currently uses the [crypto](https://nodejs.org/api/crypto.html) module's **AES-256-CTR**) P2P chat over ICMP using ```ping``` requests. I advise you to pick a strong encryption key to avoid the possibility of brute-force attacks.
 
 Uses [raw-socket](http://npmjs.org/package/raw-socket) for ICMP handling.
 
