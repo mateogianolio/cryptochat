@@ -2,9 +2,11 @@
 
 [![npm](https://img.shields.io/npm/dm/cryptochat.svg?style=flat-square)]()
 
-Encrypted (see ```encryption.js```, currently uses the [crypto](https://nodejs.org/api/crypto.html) module's **AES-256-CTR**) P2P chat over ICMP using ```ping``` requests. I advise you to pick a strong encryption key to avoid the possibility of brute-force attacks.
+[Encrypted](https://github.com/mateogianolio/cryptochat/blob/master/encryption) P2P chat over ICMP ([**I**nternet **C**ontrol **M**essage **P**rotocol](https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol)).
 
-Uses [raw-socket](http://npmjs.org/package/raw-socket) for ICMP handling.
+I strongly advise you to pick a high-entropy encryption key to avoid the possibility of brute-force attacks.
+
+Uses [raw-socket](http://npmjs.org/package/raw-socket) for ICMP handling and [terminal-colors](https://github.com/tinganho/terminal-colors) to spice it up a bit.
 
 ### Install and usage
 
