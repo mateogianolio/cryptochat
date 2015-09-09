@@ -29,6 +29,7 @@
       return crypto.pbkdf2Sync(secret, salt, 4096, 32);
     },
     hex2bytes: function(hex) {
+      console.log(hex.length, hex);
       if(hex.length % 2 !== 0)
         throw new Error(hex + ' is not a valid hex string');
 
