@@ -32,7 +32,6 @@
        * 0x08 = ICMP Echo request
        **/
       type = parseInt(buffer.substring(0, 2), 16);
-
       length = parseInt(buffer.substring(16, 18), 16);
 
       // get message
@@ -53,8 +52,8 @@
 
       // first ping
       if(!count && length === 62) {
-        salt = crypto.hex2bytes(hex.substring(0, 30));
-        iv = crypto.hex2bytes(hex.substring(30, 62));
+        salt = crypto.hex2bytes(hex.substring(0, 29));
+        iv = crypto.hex2bytes(hex.substring(30, 61));
         count++;
         return;
       }
