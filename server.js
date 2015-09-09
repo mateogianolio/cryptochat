@@ -72,7 +72,7 @@
 
       derivedKey = crypto.key(key, salt);
       message += crypto.decrypt(hex, derivedKey, iv);
-      crypto.hex2bytes(count++);
+      count++;
     }
   };
 }());
