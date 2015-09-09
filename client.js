@@ -33,6 +33,7 @@
           iv = crypto.iv(),
           derivedKey = crypto.key(key, salt);
 
+      console.log(salt);
       console.log(derivedKey);
 
       packets.push(packet('3e' + salt.toString('hex') + iv.toString('hex')));
