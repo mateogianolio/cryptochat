@@ -29,10 +29,16 @@
           payload,
           length;
 
+      var salt = crypto.salt(),
+          iv = crypto.iv(),
+          derivedKey = crypto.key(key, salt);
+
+      packets.push('3e' + salt.toString('hex') + iv.toString('hex'));
+
       for(var i = 0; i < payloads.length; i++) {
         payload = payloads[i];
         length = ('00' + (payload.length * 2).toString(16)).substr(-2);
-        payload = length + crypto.encrypt(payload, key);
+        payload = length + crypto.encrypt(payload, derivedKey, iv);
 
         packets.push(packet(payload));
       }

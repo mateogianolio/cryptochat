@@ -13,6 +13,9 @@
 
     var message = '',
         count = 0,
+        salt,
+        iv,
+        derivedKey,
         offset,
         type,
         length,
@@ -48,6 +51,14 @@
       if(type === 0)
         return;
 
+      // first ping
+      if(!count && length === 64) {
+        salt = crypto.hex2bytes(hex.substring(0, 32));
+        iv = crypto.hex2bytes(hex.substring(32, 64));
+        count++;
+        return;
+      }
+
       // encountered end ping
       if((hex.match(/f/g) || []).length === length) {
         process.stdout.write(source.green + ' ');
@@ -60,8 +71,9 @@
         return;
       }
 
-      message += crypto.decrypt(hex, key);
-      count++;
+      derivedKey = crypto.key(key, salt);
+      message += crypto.decrypt(hex, derivedKey, iv);
+      crypto.hex2bytes(count++);
     }
   };
 }());
