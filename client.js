@@ -1,6 +1,5 @@
 (function() {
   'use strict';
-
   module.exports = function(address, key) {
     if(!address) {
       console.log('Error: no IP address provided.');
@@ -29,10 +28,16 @@
           payload,
           length;
 
+      var salt = crypto.salt(),
+          iv = crypto.iv(),
+          derivedKey = crypto.key(key, salt);
+
+      packets.push(packet('3e' + salt.toString('hex') + iv.toString('hex')));
+
       for(var i = 0; i < payloads.length; i++) {
         payload = payloads[i];
         length = ('00' + (payload.length * 2).toString(16)).substr(-2);
-        payload = length + crypto.encrypt(payload, key);
+        payload = length + crypto.encrypt(payload, derivedKey, iv);
 
         packets.push(packet(payload));
       }

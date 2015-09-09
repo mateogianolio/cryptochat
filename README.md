@@ -64,12 +64,27 @@ The message data is attached as the ICMP payload.
 ### Message
 Messages are piped from ```stdin``` and split into payload packages, which are encrypted and sent as ICMP Echo requests. The payload size per request is currently set to 32 bytes. The first byte is the length of the message and the rest is the message itself.
 
+The first request contains a salt and an initialization vector needed to decrypt the payloads.
+
+<table>
+  <tr>
+    <td><b>byte 0</b></td>
+    <td><b>bytes 1-15</b></td>
+    <td><b>bytes 16-31</b></td>
+  </tr>
+  <tr>
+    <td><code>0x3e</code></td>
+    <td>salt</td>
+    <td>initialization vector</td>
+  </tr>
+</table>
+
 An "end" request is sent in order for the receiver to know when a message is completed. The end request has the following format:
 
 <table>
   <tr>
-    <td><b>length</b></td>
-    <td><b>message</b></td>
+    <td><b>byte 0</b></td>
+    <td><b>bytes 1-31</b></td>
   </tr>
   <tr>
     <td><code>0x3e</code></td>

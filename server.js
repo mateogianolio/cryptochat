@@ -1,6 +1,5 @@
 (function() {
   'use strict';
-
   module.exports = function(key) {
     require('terminal-colors');
 
@@ -13,6 +12,9 @@
 
     var message = '',
         count = 0,
+        salt,
+        iv,
+        derivedKey,
         offset,
         type,
         length,
@@ -29,7 +31,6 @@
        * 0x08 = ICMP Echo request
        **/
       type = parseInt(buffer.substring(0, 2), 16);
-
       length = parseInt(buffer.substring(16, 18), 16);
 
       // get message
@@ -50,9 +51,11 @@
 
       // encountered end ping
       if((hex.match(/f/g) || []).length === length) {
-        process.stdout.write(source.green + ' ');
-        process.stdout.write('[' + count + ']: ');
-        process.stdout.write(message.bold + '\n');
+        if(message) {
+          process.stdout.write(source.green + ' ');
+          process.stdout.write('[' + (count + 1) + ']: ');
+          process.stdout.write(message.bold + '\n');
+        }
 
         count = 0;
         message = '';
@@ -60,7 +63,16 @@
         return;
       }
 
-      message += crypto.decrypt(hex, key);
+      // first ping
+      if(count === 0) {
+        salt = crypto.hex2bytes(hex.substring(0, 30));
+        iv = crypto.hex2bytes(hex.substring(30, 62));
+        count++;
+        return;
+      }
+
+      derivedKey = crypto.key(key, salt);
+      message += crypto.decrypt(hex, derivedKey, iv);
       count++;
     }
   };

@@ -1,6 +1,6 @@
 {
   "name": "cryptochat",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "encrypted P2P chat over ICMP",
   "bin": {
     "cryptochat": "./cryptochat.js"
@@ -12,6 +12,10 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mateogianolio/cryptochat.git"
   },
   "author": "Mateo Gianolio",
   "license": "MIT"
