@@ -1,6 +1,5 @@
 (function() {
   'use strict';
-
   module.exports = function(address, key) {
     if(!address) {
       console.log('Error: no IP address provided.');

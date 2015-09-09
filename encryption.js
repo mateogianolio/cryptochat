@@ -2,7 +2,6 @@
   'use strict';
 
   var ENCRYPTION = 'AES-256-CTR';
-
   var crypto = require('crypto');
 
   module.exports = {

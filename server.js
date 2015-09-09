@@ -1,6 +1,5 @@
 (function() {
   'use strict';
-
   module.exports = function(key) {
     require('terminal-colors');
 
