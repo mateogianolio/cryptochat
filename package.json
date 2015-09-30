@@ -1,6 +1,6 @@
 {
   "name": "cryptochat",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "encrypted P2P chat over ICMP",
   "bin": {
     "cryptochat": "./cryptochat.js"
@@ -17,6 +17,22 @@
     "type": "git",
     "url": "https://github.com/mateogianolio/cryptochat.git"
   },
+  "keywords": [
+    "aes",
+    "aes-256",
+    "encrypted",
+    "encrypted chat",
+    "chat",
+    "chat application",
+    "chatting",
+    "crypto",
+    "cryptography",
+    "icmp",
+    "ping",
+    "internet control message protocol",
+    "ip",
+    "internet protocol"
+  ],
   "author": "Mateo Gianolio",
   "license": "MIT"
 }
